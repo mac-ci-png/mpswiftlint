@@ -1,0 +1,8 @@
+**/*.pkg
+**/Pods
+**/Podfile.lock
+**/*.xcworkspace
+**/Carthage
+**/Cartfile.resolved
+**/.build
+**/xcuserdata

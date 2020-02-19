@@ -1,0 +1,7 @@
+#!/bin/bash
+sudo cp /tmp/mpswiftlint /usr/local/bin/
+sudo mkdir -p /usr/local/bin/MPSwiftLintAdapter.app
+sudo cp -r /tmp/Contents /usr/local/bin/MPSwiftLintAdapter.app/
+sudo rm -rf /tmp/mpswiftlint
+sudo rm -rf /tmp/Contents
+

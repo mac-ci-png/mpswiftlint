@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <pkg-ref id="com.mparticle.mpswiftlint"/>
+    <domains enable_localSystem="true" enable_anywhere="true" enable_currentUserHome="false" />
+    <options customize="never" require-scripts="false"/>
+    <volume-check>
+        <allowed-os-versions>
+            <os-version min="10.10"/>
+        </allowed-os-versions>
+    </volume-check>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.mparticle.mpswiftlint"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.mparticle.mpswiftlint" visible="false">
+        <pkg-ref id="com.mparticle.mpswiftlint"/>
+    </choice>
+    <pkg-ref id="com.mparticle.mpswiftlint" version="1.0.0" onConclusion="none">MPSwiftLint.pkg</pkg-ref>
+</installer-gui-script>
