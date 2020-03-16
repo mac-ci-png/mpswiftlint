@@ -1,6 +1,6 @@
 # MPSwiftLint
 
-<img src="https://github.com/mParticle/mpswiftlint/raw/master/mpswiftlint.png"></img>
+<img src="https://github.com/mParticle/mpswiftlint/raw/master/mpswiftlint.gif"></img>
 
 
 The mParticle Swift Linter allows you to do compile-time verification of the data that your app is collecting.
