@@ -62,16 +62,12 @@ class MPSwiftLintCore {
         guard let planningConfig = config["planningConfig"] as? [String: Any] else {
             return
         }
-        guard let baseDir = planningConfig["baseDir"] else {
-            return
-        }
         guard let dataPlanVersionFile = planningConfig["dataPlanVersionFile"] else {
             return
         }
-        let planFile = "\(baseDir)/\(dataPlanVersionFile)"
         var encodedJson = json.replacingOccurrences(of: "'", with: "'\\''")
         encodedJson = encodedJson.replacingOccurrences(of: "\n", with: "")
-        let nodeOutput = invokeNode(arguments: "planning:events:validate --dataPlanVersionFile=\"\(planFile)\" --event='\(encodedJson)' --translateEvents")
+        let nodeOutput = invokeNode(arguments: "planning:events:validate --dataPlanVersionFile=\"\(dataPlanVersionFile)\" --event='\(encodedJson)' --translateEvents")
         handleNodeJson(nodeOutput)
     }
     

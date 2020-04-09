@@ -1,6 +1,5 @@
 {
     "planningConfig": {
-        "baseDir": ".",
-        "dataPlanVersionFile": "plan.json"
+        "dataPlanVersionFile": "./plan.json"
     }
 }
