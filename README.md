@@ -29,13 +29,12 @@ Next, download your data plan from the mParticle platform and save it to a file 
 
 You will also need to create a file `mp.config.json` in your repository root to tell the linter where to find the data plan file:
 
-> Note: the example below assumes you saved the downloaded file as `plan.json` in the root of your repository. If you used a different path or filename, adjust the `baseDir` and `dataPlanVersion` fields accordingly.
+> Note: the example below assumes you saved the downloaded file as `plan.json` in the root of your repository. If you used a different path or filename, adjust the `dataPlanVersion` field accordingly.
 
 ```js
 {
     "planningConfig": {
-        "baseDir": ".",
-        "dataPlanVersionFile": "plan.json"
+        "dataPlanVersionFile": "./plan.json"
     }
 }
 ```
