@@ -5,7 +5,41 @@ class MPSwiftLintHelpers {
     static var pwd: String? = nil
     
     class func findSwiftFiles(dir: String) -> [String] {
-        return executeBashArray(expression: "find \"\(dir)\" -name *.swift | grep -v Tests\\.swift$")
+        var resultList = executeBashArray(expression: "find \"\(dir)\" -name *.swift | grep -v Tests\\.swift$")
+        resultList = MPSwiftLintHelpers.filter(result: resultList)
+        return resultList
+    }
+    
+    class func filter(result: [String]) -> [String] {
+        var filteredResult: [String] = []
+        let included = self.includedFilePaths()
+        let excluded = self.excludedFilePaths()
+        var i = 0
+        while (i < result.count) {
+            let item = result[i]
+            if (included == nil || containsCheck(list: included, item: item)) {
+                if (excluded == nil || !containsCheck(list: excluded, item: item)) {
+                    filteredResult.append(item)
+                }
+            }
+            i += 1
+        }
+        return filteredResult
+    }
+    
+    class func containsCheck(list: [String]?, item: String) -> Bool {
+        if list == nil {
+            return false
+        }
+        var i = 0
+        while i < list!.count {
+            let listItem = list![i]
+            if (item.contains(listItem)) {
+                return true
+            }
+            i += 1
+        }
+        return false
     }
     
     class func executeBash(expression: String) -> String {
@@ -110,6 +144,46 @@ class MPSwiftLintHelpers {
             return result
         }
         return nil
+    }
+    
+    class func jsonConfig() -> [String: Any]? {
+        let workingDirectory = MPSwiftLintHelpers.workingDirectory()
+        let configFile = "\(workingDirectory)/mp.config.json"
+        guard let configContents = MPSwiftLintHelpers.readFile(configFile) else {
+            return nil
+        }
+        guard let config = MPSwiftLintHelpers.jsonParse(configContents) as? [String: Any] else {
+            return nil
+        }
+        return config
+    }
+    
+    class func includedFilePaths() -> [String]? {
+        let config = jsonConfig()
+        guard let lintingConfig = config!["lintingConfig"] as? [String: Any] else {
+            return nil
+        }
+        guard let paths = lintingConfig["included"] as? [String] else {
+            return nil
+        }
+        if paths.count <= 0 {
+            return nil
+        }
+        return paths
+    }
+    
+    class func excludedFilePaths() -> [String]? {
+        let config = jsonConfig()
+        guard let lintingConfig = config!["lintingConfig"] as? [String: Any] else {
+            return nil
+        }
+        guard let paths = lintingConfig["excluded"] as? [String] else {
+            return nil
+        }
+        if paths.count <= 0 {
+            return nil
+        }
+        return paths
     }
     
     class func setEnvironmentVar(name: String, value: String, overwrite: Bool) {

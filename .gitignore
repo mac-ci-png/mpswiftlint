@@ -5,4 +5,5 @@
 **/Carthage
 **/Cartfile.resolved
 **/.build
+**/build
 **/xcuserdata

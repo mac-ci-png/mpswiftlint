@@ -6,6 +6,7 @@ class MPSwiftLintCore {
     static var contents: String? = nil
     static var obj: [String: Any]? = nil
     static var offset: Int? = nil
+    static var config: [String: Any]? = nil
     
     class func lint(file: String, files: [String]) {
         filePath = file
@@ -51,15 +52,14 @@ class MPSwiftLintCore {
         guard let json = json else { return }
         guard let _ = MPSwiftLintHelpers.jsonParse(json) else { return }
         MPSwiftLintHelpers.verboseLog("CLI input json: \(json.replacingOccurrences(of: "\n", with: ""))")
-        let workingDirectory = MPSwiftLintHelpers.workingDirectory()
-        let configFile = "\(workingDirectory)/mp.config.json"
-        guard let configContents = MPSwiftLintHelpers.readFile(configFile) else {
-            return
+        if (config == nil) {
+            config = MPSwiftLintHelpers.jsonConfig()
+            if (config == nil) {
+                return
+            }
         }
-        guard let config = MPSwiftLintHelpers.jsonParse(configContents) as? [String: Any] else {
-            return
-        }
-        guard let planningConfig = config["planningConfig"] as? [String: Any] else {
+        
+        guard let planningConfig = config!["planningConfig"] as? [String: Any] else {
             return
         }
         guard let dataPlanVersionFile = planningConfig["dataPlanVersionFile"] else {
