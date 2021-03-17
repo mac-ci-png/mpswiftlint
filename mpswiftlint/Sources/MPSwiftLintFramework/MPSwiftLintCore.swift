@@ -59,10 +59,10 @@ class MPSwiftLintCore {
             }
         }
         
-        guard let planningConfig = config!["planningConfig"] as? [String: Any] else {
+        guard let planning = config!["planning"] as? [String: Any] else {
             return
         }
-        guard let dataPlanVersionFile = planningConfig["dataPlanVersionFile"] else {
+        guard let dataPlanVersionFile = planning["dataPlanVersionFile"] else {
             return
         }
         var encodedJson = json.replacingOccurrences(of: "'", with: "'\\''")

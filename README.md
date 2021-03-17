@@ -33,7 +33,7 @@ You will also need to create a file `mp.config.json` in your repository root to 
 
 ```js
 {
-    "planningConfig": {
+    "planning": {
         "dataPlanVersionFile": "./plan.json"
     }
 }

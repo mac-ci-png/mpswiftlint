@@ -160,10 +160,10 @@ class MPSwiftLintHelpers {
     
     class func includedFilePaths() -> [String]? {
         let config = jsonConfig()
-        guard let lintingConfig = config!["lintingConfig"] as? [String: Any] else {
+        guard let linting = config!["linting"] as? [String: Any] else {
             return nil
         }
-        guard let paths = lintingConfig["included"] as? [String] else {
+        guard let paths = linting["included"] as? [String] else {
             return nil
         }
         if paths.count <= 0 {
@@ -174,10 +174,10 @@ class MPSwiftLintHelpers {
     
     class func excludedFilePaths() -> [String]? {
         let config = jsonConfig()
-        guard let lintingConfig = config!["lintingConfig"] as? [String: Any] else {
+        guard let linting = config!["linting"] as? [String: Any] else {
             return nil
         }
-        guard let paths = lintingConfig["excluded"] as? [String] else {
+        guard let paths = linting["excluded"] as? [String] else {
             return nil
         }
         if paths.count <= 0 {
