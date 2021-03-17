@@ -8,9 +8,10 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-    - run: cd mpswiftlint
-    - run: swift build
-    - run: cd ../MPSwiftLintAdapter
-    - run: pod install
-    - run: xcodebuild -workspace MPSwiftLintAdapter.xcworkspace -scheme MPSwiftLintAdapter CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    - run: |
+            cd mpswiftlint
+            swift build
+            cd ../MPSwiftLintAdapter
+            pod install
+            xcodebuild -workspace MPSwiftLintAdapter.xcworkspace -scheme MPSwiftLintAdapter CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
     
